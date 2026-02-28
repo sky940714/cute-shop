@@ -1,0 +1,84 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* 支援 iPhone 底部安全距離 */
+.pb-safe {
+  padding-bottom: env(safe-area-inset-bottom);
+}
+
+/* 奶油黃雲朵形狀 (San-X 風格軟爛感) */
+.blob-shape {
+  border-radius: 60% 40% 70% 30% / 40% 50% 60% 50%;
+}
+
+/* 跑馬燈動畫 */
+@keyframes marquee {
+  0% { transform: translateX(100%); }
+  100% { transform: translateX(-150%); }
+}
+.animate-marquee {
+  animation: marquee 12s linear infinite;
+  white-space: nowrap;
+}
+
+/* 側邊欄滑入動畫 */
+@keyframes slide-in-right {
+  from { transform: translateX(100%); }
+  to { transform: translateX(0); }
+}
+.animate-slide-in-right {
+  animation: slide-in-right 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+/* 隱藏捲軸但保持可以滾動 */
+::-webkit-scrollbar {
+  width: 0px;
+  background: transparent;
+}
+
+/* --- 新增：進入頁面的專屬動畫 --- */
+@keyframes pulse-soft {
+  0%, 100% { transform: scale(1); opacity: 1; }
+  50% { transform: scale(1.05); opacity: 0.8; }
+}
+.animate-pulse-soft {
+  animation: pulse-soft 2s infinite ease-in-out;
+}
+
+@keyframes bounce-slow {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-15px); }
+}
+.animate-bounce-slow {
+  animation: bounce-slow 3s infinite ease-in-out;
+}
+
+/* --- 新增：無限水平輪播動畫 --- */
+@keyframes scroll-horizontal {
+  0% { transform: translateX(0); }
+  /* 往左移動剛好一半的距離 (因為我們會把圖片複製一份接在後面) */
+  100% { transform: translateX(calc(-50% - 0.5rem)); } 
+}
+.animate-scroll-horizontal {
+  /* 20s 是速度，可以自己調數字 (越大越慢) */
+  animation: scroll-horizontal 20s linear infinite;
+}
+/* 可選：手指碰到/滑鼠移過去時暫停輪播 */
+.animate-scroll-horizontal:active {
+  animation-play-state: paused;
+}
+
+/* --- 前面原有的程式碼保留 --- */
+
+/* --- 新增：滾動浮現動畫 (Scroll Reveal) --- */
+.reveal-hidden {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s cubic-bezier(0.5, 0, 0, 1), transform 0.8s cubic-bezier(0.5, 0, 0, 1);
+}
+
+.reveal-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
